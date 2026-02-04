@@ -52,8 +52,7 @@ const verifyToken = async(req, res, next) => {
   }
   const token = authorization.split(' ')[1];
   try{
-  // const decode = await admin.auth().verifyIdToken(token);
-  // console.log(decode);
+
    await admin.auth().verifyIdToken(token);
 
   
