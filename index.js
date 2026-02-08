@@ -7,7 +7,9 @@ require('dotenv').config()
 const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
 // firebase admin service key
 const admin = require("firebase-admin");
-const serviceAccount = require("./serviceKey.json");
+// index.js
+const decoded = Buffer.from(process.env.FIREBASE_SERVICE_KEY, "base64").toString("utf8");
+const serviceAccount = JSON.parse(decoded);
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
@@ -180,9 +182,9 @@ res.send(result);
     });
 
     await client.db("admin").command({ ping: 1 });
-    console.log(
-      "Pinged your deployment. You successfully connected to MongoDB!",
-    );
+    // console.log(
+      // "Pinged your deployment. You successfully connected to MongoDB!",
+    // );
   } finally {
     // await client.close();
   }
